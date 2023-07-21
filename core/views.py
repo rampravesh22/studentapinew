@@ -7,7 +7,7 @@ from core.serializers import StudentSerializer
 # Create your views here.
 
 
-class StudentView(viewsets.ModelViewSet):
+class StudentView(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
