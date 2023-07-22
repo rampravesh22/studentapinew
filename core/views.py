@@ -11,6 +11,17 @@ class StudentView(ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        # Validate the data
+        serializer.is_valid(raise_exception=True)
+
+        # Save the object to the database
+        self.perform_create(serializer)
+
+        return Response({"msg": "created successfully", "data": serializer.data}, status=status.HTTP_201_CREATED)
+
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
 
